@@ -14,7 +14,7 @@ cleanup(){
         --volume /:/srv/host:ro \
         --volume /tmp/.X11-unix:/tmp/.X11-unix:ro \
         --label expiry=$(date --date "now + 1 month") \
-        docker:18.01.0-ce-dind \
+        docker:${DOCKER_VERSION}-ce-dind \
             --host tcp://0.0.0.0:2376 &&
     sudo \
         --preserve-env \
@@ -25,7 +25,7 @@ cleanup(){
         --env DISPLAY \
         --env DOCKER_HOST=tcp://docker:2376 \
         --label expiry=$(date --date "now + 1 month") \
-        middle:0.0.0 \
+        middle:${MIDDLE_VERSION} \
             "${@}" &&
     sudo --preserve-env docker network create $(uuidgen) > network &&
     sudo \
