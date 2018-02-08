@@ -116,7 +116,7 @@ done &&
         create \
         --cidfile docker \
         --privileged \
-        --volume /tmp/.X11-unix:/tmp/.X11-unix:ro \
+        --volume /:/srv/host:ro \
         --label expiry=$(date --date "now + 1 month" +%s) \
         docker:${DOCKER_SEMVER}-ce-dind \
             --host tcp://0.0.0.0:2376 &&
