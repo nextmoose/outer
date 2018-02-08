@@ -25,7 +25,8 @@ cleanup(){
         --env DISPLAY \
         --env DOCKER_HOST=tcp://docker:2376 \
         --label expiry=$(date --date "now + 1 month") \
-        middle:0.0.0 &&
+        middle:0.0.0 \
+            "${@}" &&
     sudo --preserve-env docker network create $(uuidgen) > network &&
     sudo \
         --preserve-env \
