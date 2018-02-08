@@ -47,6 +47,18 @@ do
             export SECRETS_REPOSITORY="${2}" &&
                 shift 2
         ;;
+        --docker-semver)
+            export DOCKER_SEMVER="${2}" &&
+                shift 2
+        ;;
+        --browser-semver)
+            export BROWSER_SEMVER="${2}" &&
+                shift 2
+        ;;
+        --inner-semver)
+            export INNER_SEMVER="${2}" &&
+                shift 2
+        ;;
         *)
             echo Unsupported Option &&
                 echo ${0} &&
@@ -105,6 +117,21 @@ done &&
         echo Unspecified SECRETS_REPOSITORY &&
             exit 74
     fi &&
+    if [ -z "${DOCKER_SEMVER}" ]
+    then
+        echo Unspecified DOCKER_SEMVER &&
+            exit 75
+    fi &&
+    if [ -z "${BROWSER_SEMVER}" ]
+    then
+        echo Unspecified BROWSER_SEMVER &&
+            exit 76
+    fi &&
+    if [ -z "${MIDDLE_SEMVER}" ]
+    then
+        echo Unspecified MIDDLE_SEMVER &&
+            exit 77
+    fi &&
     cleanup(){
         sudo --preserve-env docker stop $(cat docker) $(cat middle) &&
             sudo --preserve-env docker rm -fv $(cat docker) $(cat middle) &&
@@ -140,6 +167,9 @@ done &&
         --env GPG_KEY_ID \
         --env SECRETS_ORGANIZATION \
         --env SECRETS_REPOSITORY \
+        --env DOCKER_SEMVER \
+        --env BROWSER_SEMVER \
+        --env MIDDLE_SEMVER \
         --label expiry=$(date --date "now + 1 month" +%s) \
         rebelplutonium/middle:${MIDDLE_SEMVER} \
             "${@}" &&
