@@ -112,6 +112,7 @@ done &&
     } &&
     echo WE ARE LOOKING FOR &&
     echo docker:${DOCKER_VERSION}-ce-dind &&
+    env &&
     sudo \
         --preserve-env \
         docker \
