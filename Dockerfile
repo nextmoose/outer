@@ -1,5 +1,4 @@
 ARG DOCKER_SEMVER=18.01.0
-ENV DOCKER_SEMVER=${DOCKER_SEMVER}
 FROM docker:${DOCKER_SEMVER}-ce
 RUN \
     apk add --no-cache coreutils && \
@@ -13,6 +12,7 @@ USER user
 VOLUME /home
 WORKDIR /home/user
 COPY entrypoint.sh /home/user/
+ENV DOCKER_SEMVER=18.01.0
 ENV MIDDLE_SEMVER=0.0.0
 ENV CLOUD9_PORT=10604
 ENTRYPOINT ["sh", "/home/user/entrypoint.sh"]
