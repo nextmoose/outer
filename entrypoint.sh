@@ -163,8 +163,8 @@ done &&
         --env USER_EMAIL \
         --env GPG_SECRET_KEY \
         --env GPG2_SECRET_KEY \
-        --env GPG_USER_TRUST \
-        --env GPG2_USER_TRUST \
+        --env GPG_OWNER_TRUST \
+        --env GPG2_OWNER_TRUST \
         --env GPG_KEY_ID \
         --env SECRETS_ORGANIZATION \
         --env SECRETS_REPOSITORY \
