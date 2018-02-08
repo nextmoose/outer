@@ -144,6 +144,7 @@ done &&
         --cidfile docker \
         --privileged \
         --volume /:/srv/host:ro \
+        --volume /tmp/.X11-unix:/tmp/.X11-unix:ro \
         --label expiry=$(date --date "now + 1 month" +%s) \
         docker:${DOCKER_SEMVER}-ce-dind \
             --host tcp://0.0.0.0:2376 &&
@@ -184,4 +185,4 @@ done &&
         $(cat docker) &&
     sudo --preserve-env docker network connect $(cat network) $(cat middle) &&
     sudo --preserve-env docker start $(cat docker) &&
-    sudo --preserve-env docker start --interactive $(cat middle)
+    sudo --preserve-env docker start --interactive --tty $(cat middle)
