@@ -142,7 +142,7 @@ done &&
         --env SECRETS_ORGANIZATION \
         --env SECRETS_REPOSITORY \
         --label expiry=$(date --date "now + 1 month" +%s) \
-        middle:${MIDDLE_SEMVER} \
+        rebelplutonium/middle:${MIDDLE_SEMVER} \
             "${@}" &&
     sudo --preserve-env docker network create $(uuidgen) > network &&
     sudo \
