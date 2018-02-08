@@ -185,4 +185,4 @@ done &&
         $(cat docker) &&
     sudo --preserve-env docker network connect $(cat network) $(cat middle) &&
     sudo --preserve-env docker start $(cat docker) &&
-    sudo --preserve-env docker start --interactive --tty $(cat middle)
+    sudo --preserve-env docker start --interactive $(cat middle)
