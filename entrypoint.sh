@@ -85,14 +85,14 @@ done &&
         echo Unspecified GPG2_SECRET_KEY &&
             exit 70
     fi &&
-    if [ -z "${GPG_USER_TRUST}" ]
+    if [ -z "${GPG_OWNER_TRUST}" ]
     then
-        echo Unspecified GPG_USER_TRUST &&
+        echo Unspecified GPG_OWNER_TRUST &&
             exit 71
     fi &&
-    if [ -z "${GPG2_USER_TRUST}" ]
+    if [ -z "${GPG2_OWNER_TRUST}" ]
     then
-        echo Unspecified GPG2_USER_TRUST &&
+        echo Unspecified GPG2_OWNER_TRUST &&
             exit 72
     fi &&
     if [ -z "${SECRETS_ORGANIZATION}" ]
