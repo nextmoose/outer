@@ -110,6 +110,8 @@ done &&
             sudo --preserve-env docker rm -fv $(cat docker) $(cat middle) &&
             sudo --preserve-env docker network rm $(cat network)
     } &&
+    echo WE ARE LOOKING FOR &&
+    echo docker:${DOCKER_VERSION}-ce-dind &&
     sudo \
         --preserve-env \
         docker \
