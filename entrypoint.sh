@@ -151,8 +151,8 @@ done &&
         network \
         connect \
         --alias docker \
-        $(cat main) \
+        $(cat network) \
         $(cat docker) &&
-    sudo --preserve-env docker network connect $(cat main) $(cat middle) &&
+    sudo --preserve-env docker network connect $(cat network) $(cat middle) &&
     sudo --preserve-env docker start $(cat docker) &&
     sudo --preserve-env docker start --interactive $(cat middle)
