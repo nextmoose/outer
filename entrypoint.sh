@@ -129,6 +129,17 @@ done &&
         --tty \
         --env DISPLAY \
         --env DOCKER_HOST=tcp://docker:2376 \
+        --env CLOUD9_PORT \
+        --env PROJECT_NAME \
+        --env USER_NAME \
+        --env USER_EMAIL \
+        --env GPG_SECRET_KEY \
+        --env GPG2_SECRET_KEY \
+        --env GPG_USER_TRUST \
+        --env GPG2_USER_TRUST \
+        --env GPG_KEY_ID \
+        --env SECRETS_ORGANIZATION \
+        --env SECRETS_REPOSITORY \
         --label expiry=$(date --date "now + 1 month" +%s) \
         middle:${MIDDLE_VERSION} \
             "${@}" &&
