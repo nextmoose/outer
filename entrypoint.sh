@@ -110,9 +110,6 @@ done &&
             sudo --preserve-env docker rm -fv $(cat docker) $(cat middle) &&
             sudo --preserve-env docker network rm $(cat network)
     } &&
-    echo WE ARE LOOKING FOR &&
-    echo docker:${DOCKER_VERSION}-ce-dind &&
-    env &&
     sudo \
         --preserve-env \
         docker \
@@ -122,7 +119,7 @@ done &&
         --volume /:/srv/host:ro \
         --volume /tmp/.X11-unix:/tmp/.X11-unix:ro \
         --label expiry=$(date --date "now + 1 month" +%s) \
-        docker:${DOCKER_VERSION}-ce-dind \
+        docker:${DOCKER_SEMVER}-ce-dind \
             --host tcp://0.0.0.0:2376 &&
     sudo \
         --preserve-env \
@@ -144,7 +141,7 @@ done &&
         --env SECRETS_ORGANIZATION \
         --env SECRETS_REPOSITORY \
         --label expiry=$(date --date "now + 1 month" +%s) \
-        middle:${MIDDLE_VERSION} \
+        middle:${MIDDLE_SEMVER} \
             "${@}" &&
     sudo --preserve-env docker network create $(uuidgen) > network &&
     sudo \
