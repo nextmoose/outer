@@ -111,6 +111,7 @@ done &&
             sudo --preserve-env docker network rm $(cat network)
     } &&
     echo LOG IT ... docker:${DOCKER_SEMVER}-ce-dind &&
+    env &&
     sudo \
         --preserve-env \
         docker \
