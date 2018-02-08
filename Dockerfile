@@ -14,5 +14,6 @@ WORKDIR /home/user
 COPY entrypoint.sh /home/user/
 ENV DOCKER_VERSION=${DOCKER_VERSION}
 ENV MIDDLE_VERSION=0.0.0
+ENV CLOUD9_PORT=10604
 ENTRYPOINT ["sh", "/home/user/entrypoint.sh"]
 CMD []

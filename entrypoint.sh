@@ -55,6 +55,56 @@ do
         ;;
     esac
 done &&
+    if [ -z "${CLOUD9_PORT}" ]
+    then
+        echo Unspecified CLOUD9_PORT &&
+            exit 65
+    fi &&
+    if [ -z "${PROJECT_NAME}" ]
+    then
+        echo Unspecified PROJECT_NAME &&
+            exit 66
+    fi &&
+    if [ -z "${USER_NAME}" ]
+    then
+        echo Unspecified USER_NAME &&
+            exit 67
+    fi &&
+    if [ -z "${USER_EMAIL}" ]
+    then
+        echo Unspecified USER_EMAIL &&
+            exit 68
+    fi &&
+    if [ -z "${GPG_SECRET_KEY}" ]
+    then
+        echo Unspecified GPG_SECRET_KEY &&
+            exit 69
+    fi &&
+    if [ -z "${GPG2_SECRET_KEY}" ]
+    then
+        echo Unspecified GPG2_SECRET_KEY &&
+            exit 70
+    fi &&
+    if [ -z "${GPG_USER_TRUST}" ]
+    then
+        echo Unspecified GPG_USER_TRUST &&
+            exit 71
+    fi &&
+    if [ -z "${GPG2_USER_TRUST}" ]
+    then
+        echo Unspecified GPG2_USER_TRUST &&
+            exit 72
+    fi &&
+    if [ -z "${SECRETS_ORGANIZATION}" ]
+    then
+        echo Unspecified SECRETS_ORGANIZATION &&
+            exit 73
+    fi &&
+    if [ -z "${SECRETS_REPOSITORY}" ]
+    then
+        echo Unspecified SECRETS_REPOSITORY &&
+            exit 74
+    fi &&
     cleanup(){
         sudo --preserve-env docker stop $(cat docker) $(cat middle) &&
             sudo --preserve-env docker rm -fv $(cat docker) $(cat middle) &&
@@ -94,4 +144,3 @@ done &&
     sudo --preserve-env docker network connect $(cat main) $(cat middle) &&
     sudo --preserve-env docker start $(cat docker) &&
     sudo --preserve-env docker start --interactive $(cat middle)
-        
