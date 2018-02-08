@@ -27,12 +27,12 @@ do
             export GPG2_SECRET_KEY="${2}" &&
                 shift 2
         ;;
-        --gpg-user-trust)
-            export GPG_USER_TRUST="${2}" &&
+        --gpg-owner-trust)
+            export GPG_OWNER_TRUST="${2}" &&
                 shift 2
         ;;
-        --gpg2-user-trust)
-            export GPG2_USER_TRUST="${2}" &&
+        --gpg2-owner-trust)
+            export GPG2_OWNER_TRUST="${2}" &&
                 shift 2
         ;;
         --gpg-key-id)
