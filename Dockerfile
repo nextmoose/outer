@@ -1,5 +1,4 @@
 ARG DOCKER_VERSION=18.01.0
-ENV DOCKER_VERSION=${DOCKER_VERSION}
 FROM docker:${DOCKER_VERSION}-ce
 RUN \
     apk add --no-cache coreutils && \
@@ -13,6 +12,7 @@ USER user
 VOLUME /home
 WORKDIR /home/user
 COPY entrypoint.sh /home/user/
+ENV DOCKER_VERSION=${DOCKER_VERSION}
 ENV MIDDLE_VERSION=0.0.0
 ENTRYPOINT ["sh", "/home/user/entrypoint.sh"]
 CMD []
