@@ -1,5 +1,5 @@
-ARG DOCKER_VERSION=18.01.0
-FROM docker:${DOCKER_VERSION}-ce
+ARG DOCKER_SEMVER=18.01.0
+FROM docker:${DOCKER_SEMVER}-ce
 RUN \
     apk add --no-cache coreutils && \
         apk add --no-cache sudo && \
@@ -12,8 +12,8 @@ USER user
 VOLUME /home
 WORKDIR /home/user
 COPY entrypoint.sh /home/user/
-ENV DOCKER_VERSION=${DOCKER_VERSION}
-ENV MIDDLE_VERSION=0.0.0
+ENV DOCKER_SEMVER=${DOCKER_SEMVER}
+ENV MIDDLE_SEMVER=0.0.0
 ENV CLOUD9_PORT=10604
 ENTRYPOINT ["sh", "/home/user/entrypoint.sh"]
 CMD []
