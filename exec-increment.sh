@@ -38,7 +38,7 @@ done &&
         echo Unspecified PATCH &&
             exit 67
     fi &&
-    if [ -f "exec-${MAJOR}-${MINOR}-${PATCH}.sh" ]
+    if [ -f "exec-${MAJOR}.${MINOR}.${PATCH}.sh" ]
     then
         echo exec-${MAJOR}-${MINOR}-${PATCH}.sh already exists &&
             exit 68
@@ -58,7 +58,7 @@ done &&
         echo "exec-$((${MAJOR}-1)).0.0.sh" does not exist &&
             exit 71
     fi &&
-    (cat > exec-${MAJOR}-${MINOR}-${PATCH}.sh <<EOF
+    (cat > exec-${MAJOR}.${MINOR}.${PATCH}.sh <<EOF
 #!/bin/sh
 
 xhost +local: &&
@@ -71,11 +71,11 @@ xhost +local: &&
         run \
         --interactive \
         --rm \
-        --label expiry=$(date --date "now + 1 month" +%s) \
+        --label expiry=\$((\$(date +%s)+60*60*24*7)) \
         --volume /var/run/docker.sock:/var/run/docker.sock:ro \
         --env DISPLAY \
         rebelplutonium/outer:${MAJOR}.${MINOR}.${PATCH} \
-            "${@}"    
+            "\${@}"    
 EOF
     ) &&
     git add exec-${MAJOR}-${MINOR}-${PATCH}.sh
