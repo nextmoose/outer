@@ -43,14 +43,14 @@ done &&
         echo exec-${MAJOR}-${MINOR}-${PATCH}.sh already exists &&
             exit 68
     fi &&
-    if [ ${PATCH} -gt 0 ] && [ ! -f "exec-${MAJOR}-${MINOR}.$((${PATCH}-1)).sh" ]
+    if [ ${PATCH} -gt 0 ] && [ ! -f "exec-${MAJOR}.${MINOR}.$((${PATCH}-1)).sh" ]
     then
         echo "exec-${MAJOR}.${MINOR}.$((${PATCH}-1)).sh" does not exist &&
             exit 69
     fi &&
     if [ ${MINOR} -gt 0 ] && [ ! -f "exec-${MAJOR}.$((${MINOR}-1)).0.sh" ]
     then
-        echo "exec-${MAJOR}.${MINOR}.$((${PATCH}-1)).sh" does not exist &&
+        echo "exec-${MAJOR}.$((${MINOR}-1)).0.sh" does not exist &&
             exit 70
     fi &&
     if [ ${MAJOR} -gt 0 ] && [ ! -f "exec-$((${MAJOR}-1)).0.0.sh" ]
@@ -78,4 +78,4 @@ xhost +local: &&
             "\${@}"    
 EOF
     ) &&
-    git add exec-${MAJOR}-${MINOR}-${PATCH}.sh
+    git add exec-${MAJOR}.${MINOR}.${PATCH}.sh
