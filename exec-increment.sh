@@ -68,6 +68,7 @@ xhost +local: &&
     trap cleanup EXIT &&
     sudo \
         /usr/bin/docker \
+        --preserve-env \
         run \
         --interactive \
         --rm \
