@@ -1,4 +1,4 @@
-ARG DOCKER_SEMVER=18.01.0
+ARG DOCKER_SEMVER=18.02.0
 FROM docker:${DOCKER_SEMVER}-ce
 RUN \
     apk add --no-cache coreutils && \
