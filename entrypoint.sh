@@ -138,7 +138,14 @@ done &&
     fi &&
     cleanup(){
         sudo --preserve-env docker stop $(cat docker) $(cat middle) &&
-            sudo --preserve-env docker rm -fv $(cat docker) $(cat middle)
+            sudo --preserve-env docker rm -fv $(cat docker) $(cat middle) &&
+            sudo --preserve-env docker ps --quiet --all --filter label=expiry | while read ID
+            do
+                if [ $(sudo --preserve-env docker inspect --format "{{ .Config.Labels.expiry }}" ${ID}) -lt $(date +%s) ]
+                then
+                    sudo --preserve-env docker rm -v ${ID}
+                fi
+            done
     } &&
     trap cleanup EXIT &&
     sudo --preserve-env docker save --output docker.tar docker:${DOCKER_SEMVER} &&
