@@ -198,7 +198,7 @@ done &&
         --env BROWSER_SEMVER \
         --env MIDDLE_SEMVER \
         --env INNER_SEMVER \
-        --env DOCKER_HOST=$(sudo --preserve-env docker inspect --format "DOCKER_HOST=tcp://{{ .NetworkSettings.Networks.bridge.IPAddress }}:2376" $(cat docker)) \
+        --env DOCKER_HOST=$(sudo --preserve-env docker inspect --format "tcp://{{ .NetworkSettings.Networks.bridge.IPAddress }}:2376" $(cat docker)) \
         --label expiry=$(($(date +%s)+60*60*24*7)) \
         rebelplutonium/middle:${MIDDLE_SEMVER} \
             "${@}" &&
