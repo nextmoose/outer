@@ -155,21 +155,15 @@ done &&
         --label expiry=$(($(date +%s)+60*60*24*7)) \
         docker:${DOCKER_SEMVER}-ce-dind \
             --host tcp://0.0.0.0:2376 &&
-    export DOCKER_HOST=$(sudo \
-        --preserve-env \
-        docker \
-        inspect \
-        --format "DOCKER_HOST=tcp://{{ .NetworkSettings.Networks.bridge.IPAddress }}:2376" \
-        $(cat docker)
-    ) &&
-    sudo --preserve-env docker cp docker.tar $(cat docker):docker.tar &&
-    sudo --preserve-env docker cp browser.tar $(cat docker):docker.tar &&
-    sudo --preserve-env docker cp middle.tar $(cat docker):docker.tar &&
-    sudo --preserve-env docker cp inner.tar $(cat docker):docker.tar &&
-    sudo --preserve-env docker exec --interactive $(cat docker) docker load--input docker.tar &&
-    sudo --preserve-env browser exec --interactive $(cat docker) docker load--input browser.tar &&
-    sudo --preserve-env middle exec --interactive $(cat docker) docker load--input middle.tar &&
-    sudo --preserve-env inner exec --interactive $(cat docker) docker load--input inner.tar &&
+    sudo --preserve-env docker start $(cat docker) &&
+    sudo --preserve-env docker cp docker.tar $(cat docker):/docker.tar &&
+    sudo --preserve-env docker cp browser.tar $(cat docker):/browser.tar &&
+    sudo --preserve-env docker cp middle.tar $(cat docker):/middle.tar &&
+    sudo --preserve-env docker cp inner.tar $(cat docker):/inner.tar &&
+    sudo --preserve-env docker exec --interactive $(cat docker) docker load--input /docker.tar &&
+    sudo --preserve-env browser exec --interactive $(cat docker) docker load--input /browser.tar &&
+    sudo --preserve-env middle exec --interactive $(cat docker) docker load--input /middle.tar &&
+    sudo --preserve-env inner exec --interactive $(cat docker) docker load--input /inner.tar &&
     sudo \
         --preserve-env \
         docker \
@@ -193,8 +187,8 @@ done &&
         --env BROWSER_SEMVER \
         --env MIDDLE_SEMVER \
         --env INNER_SEMVER \
+        --env DOCKER_HOST=$(sudo --preserve-env docker inspect --format "DOCKER_HOST=tcp://{{ .NetworkSettings.Networks.bridge.IPAddress }}:2376" $(cat docker)) \
         --label expiry=$(($(date +%s)+60*60*24*7)) \
         rebelplutonium/middle:${MIDDLE_SEMVER} \
             "${@}" &&
-    sudo --preserve-env docker start $(cat docker) &&
     sudo --preserve-env docker start --interactive $(cat middle)
