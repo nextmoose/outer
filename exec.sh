@@ -31,7 +31,7 @@ do
                     --volume /var/run/docker.sock:/var/run/docker.sock:ro \
                     --env DISPLAY \
                     rebelplutonium/outer:${MAJOR}.${MINOR}.${PATCH} \
-                        "\${@}"
+                        "${@}"
         ;;
         *)
             echo Unknown Option &&
