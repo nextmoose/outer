@@ -16,7 +16,8 @@ do
                 shift 2
         ;;
         --)
-            xhost +local: &&
+            shift &&
+                xhost +local: &&
                 cleanup(){
                     xhost -
                 } &&
