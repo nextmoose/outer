@@ -1,49 +1,10 @@
 #!/bin/sh
 
-MONIKER=d1523b1c-85a1-40fb-8b55-6bf6d9ae0a0a &&
-    while [ ${#} -gt 0 ]
-    do
-        case ${1} in
-            --moniker)
-                MONIKER="${2}" &&
-                    shift 2
-            ;;
-            --cloud9-port)
-                export CLOUD9_PORT="${2}" &&
-                    shift 2
-            ;;
-            --project-name)
-                export PROJECT_NAME="${2}" &&
-                    shift 2
-            ;;
-            --user-name)
-                export USER_NAME="${2}" &&
-                    shift 2
-            ;;
-            --user-email)
-                export USER_EMAIL="${2}" &&
-                    shift 2
-            ;;
-            --gpg-secret-key)
-                export GPG_SECRET_KEY="${2}" &&
-                    shift 2
-            ;;
-            --gpg2-secret-key)
-                export GPG2_SECRET_KEY="${2}" &&
-                    shift 2
-            ;;
-            --gpg-owner-trust)
-                export GPG_OWNER_TRUST="${2}" &&
-                    shift 2
-            ;;
-            --gpg2-owner-trust)
-                export GPG2_OWNER_TRUST="${2}" &&
-                    shift 2
-            ;;
-            --gpg-key-id)
-                export GPG_KEY_ID="${2}" &&
-                    shift 2
-            ;;
+source public.env &&
+    export GPG_SECRET_KEY="$(cat private/gpg.secret.key)" &&
+    export GPG2_SECRET_KEY="$(cat private/gpg2.secret.key)" &&
+    export GPG_OWNER_TRUST="$(cat public/gpg.owner.trust)" &&
+    export GPG2_OWNER_TRUST="$(cat public/gpg2.owner.trust)" &&
             --secrets-organization)
                 export SECRETS_ORGANIZATION="${2}" &&
                     shift 2
