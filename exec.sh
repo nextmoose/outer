@@ -35,8 +35,7 @@ cleanup(){
         --rm \
         --label expiry=$(($(date +%s)+60*60*24*7)) \
         --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock,readonly=true \
-        --mount type=bind,source=$(pwd),destination=/home/user/working \
+        --mount type=bind,source=$(pwd),destination=/srv/working \
         --env DISPLAY \
-        --env TARGET_UID=$(id -u) \
         rebelplutonium/outer:${MAJOR}.${MINOR}.${PATCH} \
             "${@}"
